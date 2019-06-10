@@ -9,7 +9,7 @@ namespace ViajaNet.Application.Contracts
         void AppendToQueue(Visit visitToSave);
         Visit RetrieveFromQueue();
         IConnection CreateConnection();
-        Task<Visit> Salvar(Visit visitToSave);
+        Task<Visit> Salvar(Visit visitToSave, string csvDbPath);
         QueueDeclareOk CreateQueue(IModel channel);
     }
 }

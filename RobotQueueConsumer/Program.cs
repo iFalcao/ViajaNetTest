@@ -35,9 +35,18 @@ namespace RobotQueueConsumer
             consumer.Received += (ch, ea) =>
             {
                 var visit = ea.Body.ByteArrayToObject<Visit>();
-                service.Salvar(visit);
-                Console.WriteLine($"Visita foi salva com sucesso.");
-                Channel.BasicAck(ea.DeliveryTag, false);
+                try
+                {
+                    var newVisit = service.Salvar(visit, GetWebApiPath() + 
+                        Configuration.GetConnectionString("CsvDbPath")).Result;
+                    Console.WriteLine($"Visita com id {newVisit.Id} foi salva com sucesso.");
+                    Channel.BasicAck(ea.DeliveryTag, false);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erro ao salvar visita: ${ex.Message}");
+                }
+                
             };
             var x = service.CreateQueue(Channel);
             var consumerTag = Channel.BasicConsume(x.QueueName, false, consumer);

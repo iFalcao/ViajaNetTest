@@ -1,6 +1,7 @@
 ﻿using ViajaNet.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using CsvHelper.Configuration;
 
 namespace InfraStructure.Mapping
 {
@@ -24,6 +25,18 @@ namespace InfraStructure.Mapping
             builder.Property(_ => _.PageParams)
                 .IsRequired()
                 .HasColumnType("varchar(MAX)");
+        }
+    }
+
+    public class VisitMap : ClassMap<Visit>
+    {
+        public VisitMap()
+        {
+            Map(m => m.Id).Index(0).Name("Id");
+            Map(m => m.Url).Index(1).Name("Url");
+            Map(m => m.Ip).Index(2).Name("Ip");
+            Map(m => m.Browser).Index(3).Name("Browser");
+            Map(m => m.PageParams).Index(4).Name("Parâmetros");
         }
     }
 }

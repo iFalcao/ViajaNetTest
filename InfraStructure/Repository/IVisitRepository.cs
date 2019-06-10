@@ -8,6 +8,6 @@ namespace InfraStructure.Repository
 {
     public interface IVisitRepository
     {
-        Task<Visit> Save(Visit newVisit);
+        Task<Visit> Save(Visit newVisit, string csvDbPath);
     }
 }

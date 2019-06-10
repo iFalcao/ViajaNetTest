@@ -43,9 +43,9 @@ namespace ViajaNet.Application.Services
             }
         }
 
-        public async Task<Visit> Salvar(Visit visitToSave)
+        public async Task<Visit> Salvar(Visit visitToSave, string csvDbPath)
         {
-            return await this._repo.Save(visitToSave);
+            return await this._repo.Save(visitToSave, csvDbPath);
         }
 
         private ConnectionFactory GetConnectionFactory()
